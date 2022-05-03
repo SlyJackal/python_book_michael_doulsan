@@ -9,7 +9,7 @@ def pickle_scores(player_name, score):
         print('I open the file in pickle_scores!!!!!!!')
         score_list = pickle.load(s)
     except:
-        score_list = {}
+        score_list = dict()
         print('Except works!')
     f = open("pickle_scores.dat", "wb+")
     #if name not in score_list:     
