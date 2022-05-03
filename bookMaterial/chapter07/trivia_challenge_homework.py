@@ -8,18 +8,24 @@ def pickle_scores(player_name, score):
     try:
         print('I open the file in pickle_scores!!!!!!!')
         score_list = pickle.load(s)
+        print('I open the file in pickle_scores!!!!!!!')
     except:
         score_list = dict()
         print('Except works!')
     f = open("pickle_scores.dat", "wb+")
     #if name not in score_list:     
     print(f"\n  Your score ({score}) added! Have fun {player_name}!")
-    #else:
-        #while name in score_list: 
-            #name = input('Your name is exsist in score list, create new!')
-
     score_list[player_name] = score
-    score_list = sorted(score_list.keys())
+
+    sorted_values = sorted(score_list.values(), reverse=True) # Sort the values
+    sorted_score_list = dict()
+
+    for i in sorted_values:
+        for k in score_list.keys():
+            if score_list[k] == i:
+                sorted_score_list[k] = score_list[k]
+                break
+    score_list = sorted_score_list      
     print("\n", player_name, "has been added.")
 
     pickle.dump(score_list, f)
@@ -124,7 +130,7 @@ def main():
             print("\nWrong.", end=" ")
         print(explanation)
         print("Score:", score, "\n\n")
-
+        score = int(score)
         # get next block
         category, question, answers, correct, explanation, cost = next_block(trivia_file)
         
@@ -133,9 +139,9 @@ def main():
     
     print("That was the last question!")
     print(f"Your ({player_name}) final score is {score}")
-    pickle_scores(player_name, int(score))
+    pickle_scores(player_name, score)
     
-show_records()
-main() 
+
+#main() 
 show_records()
 input("\n\nPress the enter key to exit.")
