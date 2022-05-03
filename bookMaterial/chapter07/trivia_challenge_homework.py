@@ -4,11 +4,9 @@
 import sys, pickle, shelve
 
 def pickle_scores(player_name, score):
-    s = open("pickle_scores.dat", "rb+")
-    try:
-        print('I open the file in pickle_scores!!!!!!!')
-        score_list = pickle.load(s)
-        print('I open the file in pickle_scores!!!!!!!')
+    try: 
+        s = open("pickle_scores.dat", "rb+")
+        score_list = pickle.load(s) 
     except:
         score_list = dict()
         print('Except works!')
@@ -17,22 +15,11 @@ def pickle_scores(player_name, score):
     print(f"\n  Your score ({score}) added! Have fun {player_name}!")
     score_list[player_name] = score
 
-    sorted_values = sorted(score_list.values(), reverse=True) # Sort the values
-    sorted_score_list = dict()
 
-    for i in sorted_values:
-        for k in score_list.keys():
-            if score_list[k] == i:
-                sorted_score_list[k] = score_list[k]
-                break
-    score_list = sorted_score_list      
     print("\n", player_name, "has been added.")
 
     pickle.dump(score_list, f)
     f.close() 
-
-
-
 
 def show_records():
     try:
@@ -40,12 +27,24 @@ def show_records():
         a = pickle.load(f)
         print('\nHigh scores\n')
         print('NAME\tSCORE')
-        for name in a:
+        
+        sorted_score_list = dict()
+
+        sorted_values = sorted(a.values(), reverse=True) # Sort the values
+        for i in sorted_values:
+            for k in a.keys():
+                if a[k] == i:
+                    sorted_score_list[k] = a[k]
+                    break 
+        for name in sorted_score_list:
             print(f'{name}\t{a[name]}')
         f.close()
         print('---------')
     except:
         print('Score list is empety!')
+        
+    
+  
 
 
 def open_file(file_name, mode):
@@ -141,7 +140,7 @@ def main():
     print(f"Your ({player_name}) final score is {score}")
     pickle_scores(player_name, score)
     
-
-#main() 
+show_records()
+main() 
 show_records()
 input("\n\nPress the enter key to exit.")
