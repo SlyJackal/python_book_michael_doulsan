@@ -10,15 +10,15 @@ def pickle_scores(player_name, score):
     except:
         score_list = dict()
         print('Except works!')
-    f = open("pickle_scores.dat", "wb+")
+    f = open("pickle_scores.dat", "ab+")
     #if name not in score_list:     
     print(f"\n  Your score ({score}) added! Have fun {player_name}!")
+    print(score_list, '1')
     score_list[player_name] = score
-
-
+    print(score_list, '2')
     print("\n", player_name, "has been added.")
-
     pickle.dump(score_list, f)
+    print(score_list, '3')
     f.close() 
 
 def show_records():
@@ -27,9 +27,7 @@ def show_records():
         a = pickle.load(f)
         print('\nHigh scores\n')
         print('NAME\tSCORE')
-        
         sorted_score_list = dict()
-
         sorted_values = sorted(a.values(), reverse=True) # Sort the values
         for i in sorted_values:
             for k in a.keys():
@@ -43,10 +41,6 @@ def show_records():
     except:
         print('Score list is empety!')
         
-    
-  
-
-
 def open_file(file_name, mode):
     """Open a file."""
     try:
@@ -67,9 +61,7 @@ def next_line(the_file):
 def next_block(the_file):
     """Return the next block of data from the trivia file."""
     category = next_line(the_file)
-    
     question = next_line(the_file)
-    
     answers = []
     for i in range(4):
         answers.append(next_line(the_file))
@@ -86,9 +78,6 @@ def next_block(the_file):
         cost = 0
 
     explanation = next_line(the_file)
-
-    
-
     return category, question, answers, correct, explanation, cost
 
 def welcome(title):
@@ -99,8 +88,6 @@ def welcome(title):
 #def records():
 #    text_file = open("read_it.txt", "r")
 #    text_file = open('records.txt', 'w+', encoding='utf-8')
-
- 
 def main():
     player_name = input('Enter your name: ')
     trivia_file = open_file('bookMaterial/chapter07/trivia.txt', "r")
@@ -108,7 +95,6 @@ def main():
     welcome(title)
     score = 0
     
-
     # get first block
     category, question, answers, correct, explanation, cost = next_block(trivia_file)
     while category:
@@ -131,16 +117,15 @@ def main():
         print("Score:", score, "\n\n")
         score = int(score)
         # get next block
-        category, question, answers, correct, explanation, cost = next_block(trivia_file)
-        
-     
-    trivia_file.close()
-    
+        category, question, answers, correct, explanation, cost = next_block(trivia_file)     
+    trivia_file.close()   
     print("That was the last question!")
     print(f"Your ({player_name}) final score is {score}")
     pickle_scores(player_name, score)
     
-show_records()
+    
+#show_records()
 main() 
-show_records()
+#show_records()
+
 input("\n\nPress the enter key to exit.")
