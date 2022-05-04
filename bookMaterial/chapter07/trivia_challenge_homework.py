@@ -10,7 +10,7 @@ def pickle_scores(player_name, score):
     except:
         score_list = dict()
         print('Except works!')
-    f = open("pickle_scores.dat", "ab+")
+    f = open("pickle_scores.dat", "wb+")
     #if name not in score_list:     
     print(f"\n  Your score ({score}) added! Have fun {player_name}!")
     print(score_list, '1')
@@ -25,18 +25,17 @@ def show_records():
     try:
         f = open("pickle_scores.dat", "rb+")
         a = pickle.load(f)
+        f.close()
         print('\nHigh scores\n')
         print('NAME\tSCORE')
-        sorted_score_list = dict()
-        sorted_values = sorted(a.values(), reverse=True) # Sort the values
-        for i in sorted_values:
-            for k in a.keys():
-                if a[k] == i:
-                    sorted_score_list[k] = a[k]
-                    break 
-        for name in sorted_score_list:
-            print(f'{name}\t{a[name]}')
-        f.close()
+        list_out=[]
+        list_in=[]
+        for r in a:
+            list_in=[a[r], r]
+            list_out.append(list_in)
+        list_out.sort(reverse=True)
+        for i in list_out:
+            print(f'{i[1]}\t{i[0]}')
         print('---------')
     except:
         print('Score list is empety!')
@@ -124,8 +123,8 @@ def main():
     pickle_scores(player_name, score)
     
     
-#show_records()
-main() 
+show_records()
+#main() 
 #show_records()
 
 input("\n\nPress the enter key to exit.")
