@@ -41,8 +41,7 @@ def show_records():
         to_print = ''
         names = list(a.keys())
         vals = list(a.values())
-        vals.sort()
-        vals.reverse()
+        vals.sort(reverse=True)
         for val in vals:
             for i in range(len(names)):
                 if a[names[i]] == val:
