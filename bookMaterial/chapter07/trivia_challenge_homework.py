@@ -39,9 +39,11 @@ def show_records():
             print(f'{i[1]}\t{i[0]}')
         '''
         to_print = ''
-        names = a.keys()
-        sorted_vals = a.values().sort()
-        for val in sorted_vals:
+        names = list(a.keys())
+        vals = list(a.values())
+        vals.sort()
+        vals.reverse()
+        for val in vals:
             for i in range(len(names)):
                 if a[names[i]] == val:
                     to_print += f'{names.pop(i)}: {val}\n'
