@@ -28,6 +28,7 @@ def show_records():
         f.close()
         print('\nHigh scores\n')
         print('NAME\tSCORE')
+        '''
         list_out=[]
         list_in=[]
         for r in a:
@@ -36,6 +37,16 @@ def show_records():
         list_out.sort(reverse=True)
         for i in list_out:
             print(f'{i[1]}\t{i[0]}')
+        '''
+        to_print = ''
+        names = a.keys()
+        sorted_vals = a.values().sort()
+        for val in sorted_vals:
+            for i in range(len(names)):
+                if a[names[i]] == val:
+                    to_print += f'{names.pop(i)}: {val}\n'
+                    break
+        print(to_print)
         print('---------')
     except:
         print('Score list is empety!')
