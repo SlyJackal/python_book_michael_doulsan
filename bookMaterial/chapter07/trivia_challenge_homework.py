@@ -1,6 +1,5 @@
 # Trivia Challenge
 # Trivia game that reads a plain text file
-
 import sys, pickle, shelve
 
 def pickle_scores(player_name, score):
@@ -13,12 +12,9 @@ def pickle_scores(player_name, score):
     f = open("pickle_scores.dat", "wb+")
     #if name not in score_list:     
     print(f"\n  Your score ({score}) added! Have fun {player_name}!")
-    print(score_list, '1')
     score_list[player_name] = score
-    print(score_list, '2')
     print("\n", player_name, "has been added.")
     pickle.dump(score_list, f)
-    print(score_list, '3')
     f.close() 
 
 def show_records():
@@ -26,6 +22,9 @@ def show_records():
         f = open("pickle_scores.dat", "rb+")
         a = pickle.load(f)
         f.close()
+    except:
+        print('Score list is empety!')
+    else:
         print('\nHigh scores\n')
         print('NAME\tSCORE')
         '''
@@ -38,19 +37,17 @@ def show_records():
         for i in list_out:
             print(f'{i[1]}\t{i[0]}')
         '''
-        to_print = ''
-        names = list(a.keys())
-        vals = list(a.values())
-        vals.sort(reverse=True)
-        for val in vals:
-            for i in range(len(names)):
-                if a[names[i]] == val:
-                    to_print += f'{names.pop(i)}: {val}\n'
-                    break
+        to_print = '' #создали пустую строку
+        names = list(a.keys()) #создали список ключей словаря
+        vals = list(a.values()) #создали список значений словаря
+        vals.sort(reverse=True) #отсортировали список значений от большего к меньшему
+        for val in vals: #для всех val(значений) в списке значений словаря
+            for i in range(len(names)): #для всех i(значений) в промежутке до длины списка(количества переменных в нем)
+                if a[names[i]] == val: #если в словаре "а", по ключу из списка "names" значение равер val
+                    to_print += f'{names.pop(i)}:\t {val}\n' #тогда в строку "to_print" дабавить строку, где из i извлечено(удалено) из списка "names" и значение "val"
+                    break #прервать цикл
         print(to_print)
         print('---------')
-    except:
-        print('Score list is empety!')
         
 def open_file(file_name, mode):
     """Open a file."""
@@ -96,9 +93,6 @@ def welcome(title):
     print("\t\tWelcome to Trivia Challenge!\n")
     print("\t\t", title, "\n")
 
-#def records():
-#    text_file = open("read_it.txt", "r")
-#    text_file = open('records.txt', 'w+', encoding='utf-8')
 def main():
     player_name = input('Enter your name: ')
     trivia_file = open_file('bookMaterial/chapter07/trivia.txt', "r")
@@ -133,10 +127,9 @@ def main():
     print("That was the last question!")
     print(f"Your ({player_name}) final score is {score}")
     pickle_scores(player_name, score)
-    
-    
+      
 show_records()
-#main() 
-#show_records()
+main() 
+show_records()
 
 input("\n\nPress the enter key to exit.")
