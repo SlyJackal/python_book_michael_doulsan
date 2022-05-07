@@ -114,14 +114,33 @@ def show_txt_records():
     score_file = open_file('trivia_score.txt', 'r')
     name, score = next_block_score(score_file)
     print('NAME\tSCORE')
-    name = next_line_score(score_file)
-    score = next_line_score(score_file)
-    print(f'{name}\t{score}')
-    while score:
+    #костыль, найти другой метод
+    '''
+    first = f'{name}\t{score}'
+    first = first.replace("\n", "")
+    print(f'{first}')
+    while name:
         name = next_line_score(score_file)
         score = next_line_score(score_file)
         print(f'{name}\t{score}')
+    '''
+    to_print = '' #создали пустую строку
+    names, vals = next_block_score(score_file)
+    while names:
+        names = list(next_line_score(score_file)) 
+        vals = list(next_line_score(score_file)) 
+        vals.sort(reverse=True) 
+        for val in vals: 
+            for i in range(len(names)):
+                if names[i] == val: 
+                    to_print += f'{names.pop(i)}:\t {val}\n' 
+                    
        
+        print(to_print)
+        print('---------')
+        break
+
+
 
 def main():
     player_name = input('Enter your name: ')
