@@ -114,6 +114,9 @@ def show_txt_records():
     score_file = open_file('trivia_score.txt', 'r')
     name, score = next_block_score(score_file)
     print('NAME\tSCORE')
+    name = next_line_score(score_file)
+    score = next_line_score(score_file)
+    print(f'{name}\t{score}')
     while score:
         name = next_line_score(score_file)
         score = next_line_score(score_file)
