@@ -18,11 +18,6 @@ def pickle_scores(player_name, score):
     pickle.dump(score_list, f)
     f.close() 
 
-
-
-
-
-
 def show_records():
     try:
         f = open("pickle_scores.dat", "rb+")
@@ -84,7 +79,6 @@ def next_block_score(the_file):
     return name, score
 
 def next_block(the_file):
-    """Return the next block of data from the trivia file."""
     category = next_line(the_file)
     question = next_line(the_file)
     answers = []
@@ -115,7 +109,7 @@ def show_txt_records():
     name, score = next_block_score(score_file)
     print('NAME\tSCORE')
     #костыль, найти другой метод
-    '''
+    
     first = f'{name}\t{score}'
     first = first.replace("\n", "")
     print(f'{first}')
@@ -134,11 +128,13 @@ def show_txt_records():
             for i in range(len(names)):
                 if names[i] == val: 
                     to_print += f'{names.pop(i)}:\t {val}\n' 
-                    
+                 
        
         print(to_print)
-        print('---------')
         break
+        '''   
+    print('---------')
+        
 
 
 
