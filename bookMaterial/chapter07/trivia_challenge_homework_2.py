@@ -108,11 +108,11 @@ def show_txt_records():
     score_file = open_file('trivia_score.txt', 'r')
     name, score = next_block_score(score_file)
     print('NAME\tSCORE')
-    #костыль, найти другой метод
-    
+    #костыль, найти другой метод (начало)
     first = f'{name}\t{score}'
     first = first.replace("\n", "")
     print(f'{first}')
+    #костыль конец
     while name:
         name = next_line_score(score_file)
         score = next_line_score(score_file)
