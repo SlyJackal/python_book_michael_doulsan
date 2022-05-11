@@ -1,7 +1,6 @@
 # Trivia Challenge
 # Trivia game that reads a plain text file
 import sys, pickle, shelve
-from traceback import print_tb
 
 def pickle_scores(player_name, score):
     try: 
@@ -135,8 +134,7 @@ def show_txt_records():
         for val in vals: 
             for i in range(len(names)):
                 if names[i] == val: 
-                    to_print += f'{names.pop(i)}:\t {val}\n' 
-                    
+                    to_print += f'{names.pop(i)}:\t {val}\n'            
         '''
         print(to_print)
         break  
