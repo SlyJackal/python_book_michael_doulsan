@@ -106,6 +106,7 @@ def welcome(title):
 
 def show_txt_records():
     score_file = open_file('trivia_score.txt', 'r')
+    '''
     name, score = next_block_score(score_file)
     print('NAME\tSCORE')
     #костыль, найти другой метод (начало)
@@ -119,24 +120,27 @@ def show_txt_records():
         print(f'{name}\t{score}')
     '''
     to_print = '' #создали пустую строку
+    names = next_line_score(score_file)
+    vals = next_line_score(score_file)
+    print(names)
+    print(vals)
     names, vals = next_block_score(score_file)
-    while names:
-        names = list(next_line_score(score_file)) 
-        vals = list(next_line_score(score_file)) 
+    while vals:
+        names += next_line_score(score_file)
+        print(names)
+        vals += next_line_score(score_file)
+        print(vals)
+        '''
         vals.sort(reverse=True) 
         for val in vals: 
             for i in range(len(names)):
                 if names[i] == val: 
                     to_print += f'{names.pop(i)}:\t {val}\n' 
-                 
-       
+                    
+        '''
         print(to_print)
-        break
-        '''   
-    print('---------')
-        
-
-
+        break  
+    print('---------')  
 
 def main():
     player_name = input('Enter your name: ')
@@ -175,6 +179,5 @@ def main():
       
 show_txt_records()
 #main() 
-
 
 input("\n\nPress the enter key to exit.")
