@@ -2,20 +2,17 @@
 # Trivia game that reads a plain text file
 import sys, pickle, shelve
 
-def pickle_scores(player_name, score):
-    try: 
-        s = open("pickle_scores.dat", "rb+")
-        score_list = pickle.load(s) 
-    except:
-        score_list = dict()
-        print('Except works!')
-    f = open("pickle_scores.dat", "wb+")
-    #if name not in score_list:     
-    print(f"\n  Your score ({score}) added! Have fun {player_name}!")
-    score_list[player_name] = score
-    print("\n", player_name, "has been added.")
-    pickle.dump(score_list, f)
-    f.close() 
+def open_score():
+    score_dict = dict()
+    with open("trivia_score.txt") as file:
+        key = file.readline()
+        value = file.readline()
+        score_dict[key] = value
+        for line in file:
+            key = file.readline()
+            value = file.readline()
+            score_dict[key] = value
+    print (score_dict)
 
 def show_records():
     try:
@@ -48,6 +45,8 @@ def show_records():
                     break #прервать цикл
         print(to_print)
         print('---------')
+
+    
         
 def open_file(file_name, mode):
     """Open a file."""
@@ -175,7 +174,8 @@ def main():
     print(f"Your ({player_name}) final score is {score}")
     pickle_scores(player_name, score)
       
-show_txt_records()
+open_score()
+#show_txt_records()
 #main() 
 
 input("\n\nPress the enter key to exit.")
