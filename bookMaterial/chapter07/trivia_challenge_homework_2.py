@@ -5,14 +5,10 @@ import sys, pickle, shelve
 def open_score():
     score_dict = dict()
     with open("trivia_score.txt") as file:
-        key = file.readline()
-        value = file.readline()
-        score_dict[key] = value
-        for line in file:
-            key = file.readline()
-            value = file.readline()
-            score_dict[key] = value
-    print (score_dict)
+        while key := file.readline().strip():
+            score_dict[key] = file.readline().strip()
+            
+    print(score_dict)
 
 def show_records():
     try:
