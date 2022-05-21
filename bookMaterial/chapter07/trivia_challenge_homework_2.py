@@ -2,47 +2,30 @@
 # Trivia game that reads a plain text file
 import sys, pickle, shelve
 
-def open_score():
-    score_dict = dict()
-    with open("trivia_score.txt") as file:
-        while key := file.readline().strip():
-            score_dict[key] = file.readline().strip()
-            
-    print(score_dict)
-
 def show_records():
-    try:
-        f = open("pickle_scores.dat", "rb+")
-        a = pickle.load(f)
-        f.close()
+    score_dict = dict()
+    try: 
+        with open("trivia_score.txt") as file:
+            while key := file.readline().strip():
+                score_dict[key] = int(file.readline().strip())
     except:
         print('Score list is empety!')
     else:
-        print('\nHigh scores\n')
-        print('NAME\tSCORE')
-        '''
-        list_out=[]
-        list_in=[]
-        for r in a:
-            list_in=[a[r], r]
-            list_out.append(list_in)
-        list_out.sort(reverse=True)
-        for i in list_out:
-            print(f'{i[1]}\t{i[0]}')
-        '''
-        to_print = '' #создали пустую строку
-        names = list(a.keys()) #создали список ключей словаря
-        vals = list(a.values()) #создали список значений словаря
-        vals.sort(reverse=True) #отсортировали список значений от большего к меньшему
-        for val in vals: #для всех val(значений) в списке значений словаря
-            for i in range(len(names)): #для всех i(значений) в промежутке до длины списка(количества переменных в нем)
-                if a[names[i]] == val: #если в словаре "а", по ключу из списка "names" значение равер val
-                    to_print += f'{names.pop(i)}:\t {val}\n' #тогда в строку "to_print" дабавить строку, где из i извлечено(удалено) из списка "names" и значение "val"
+        to_print = ''
+        names = list(score_dict.keys())
+        vals = list(score_dict.values())
+        vals.sort(reverse=True)
+        for val in vals:
+            for i in range(len(names)): 
+                if score_dict[names[i]] == val: 
+                    to_print += f'{names.pop(i)}\t {val}\n' 
                     break #прервать цикл
+        print('\nHigh scores\n')
+        print(f'NAMES\tSCORES')
         print(to_print)
         print('---------')
-
-    
+    print(score_dict)
+   
         
 def open_file(file_name, mode):
     """Open a file."""
@@ -98,42 +81,6 @@ def welcome(title):
     print("\t\tWelcome to Trivia Challenge!\n")
     print("\t\t", title, "\n")
 
-def show_txt_records():
-    score_file = open_file('trivia_score.txt', 'r')
-    '''
-    name, score = next_block_score(score_file)
-    print('NAME\tSCORE')
-    #костыль, найти другой метод (начало)
-    first = f'{name}\t{score}'
-    first = first.replace("\n", "")
-    print(f'{first}')
-    #костыль конец
-    while name:
-        name = next_line_score(score_file)
-        score = next_line_score(score_file)
-        print(f'{name}\t{score}')
-    '''
-    to_print = '' #создали пустую строку
-    names = next_line_score(score_file)
-    vals = next_line_score(score_file)
-    print(names)
-    print(vals)
-    names, vals = next_block_score(score_file)
-    while vals:
-        names += next_line_score(score_file)
-        print(names)
-        vals += next_line_score(score_file)
-        print(vals)
-        '''
-        vals.sort(reverse=True) 
-        for val in vals: 
-            for i in range(len(names)):
-                if names[i] == val: 
-                    to_print += f'{names.pop(i)}:\t {val}\n'            
-        '''
-        print(to_print)
-        break  
-    print('---------')  
 
 def main():
     player_name = input('Enter your name: ')
@@ -170,8 +117,7 @@ def main():
     print(f"Your ({player_name}) final score is {score}")
     pickle_scores(player_name, score)
       
-open_score()
-#show_txt_records()
+show_records()
 #main() 
 
 input("\n\nPress the enter key to exit.")
