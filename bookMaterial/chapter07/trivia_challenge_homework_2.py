@@ -24,8 +24,18 @@ def show_records():
         print(f'NAMES\tSCORES')
         print(to_print)
         print('---------')
-    print(score_dict)
-   
+    file.close
+    return score_dict
+
+#def save_records():
+    #with open("trivia_score.txt") as file:
+        #write_score = list(save_records())
+        #print(save_records())
+        #print(write_score)
+        #print(write_score[1])
+        #while file.writelines:= 
+        #file.writelines(["cat\n", "dog\n"])
+
         
 def open_file(file_name, mode):
     """Open a file."""
@@ -118,6 +128,9 @@ def main():
     pickle_scores(player_name, score)
       
 show_records()
+print('----------------')
+#save_records()
+print('----------------')
 #main() 
 
 input("\n\nPress the enter key to exit.")
