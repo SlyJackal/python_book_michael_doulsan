@@ -26,10 +26,14 @@ def show_records():
         #print(to_print)
         #print('---------')
     file.close
+    print(to_print)
     return score_dict
 
 def save_records_txt():
-    
+    with open('write_score.txt','w') as file:
+        for key,val in score_dict.items():
+            file.write('{}\n{}\n'.format(key,val))
+    '''
     with open("write_score.txt", 'w') as file:
         write_score_txt_keys = list(score_dict.keys())
         write_score_txt_values = str(list(score_dict.values()))
@@ -44,7 +48,7 @@ def save_records_txt():
         print(range_list)
         #while file.writelines:= 
         #file.writelines(["cat\n", "dog\n"])
-        
+    '''    
 def open_file(file_name, mode):
     """Open a file."""
     try:
