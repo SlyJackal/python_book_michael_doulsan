@@ -12,7 +12,7 @@ def show_records():
             while key := file.readline().strip():
                 score_dict[key] = int(file.readline().strip())
     except:
-        print('Score list is empety!')
+        print('Score list is empty!')
     else:
         global to_print
         to_print = ''
@@ -31,7 +31,7 @@ def show_records():
 def save_records_txt():
     with open('trivia_score.txt','w') as file:
         for key,val in score_dict.items():
-            file.write('{}\n{}\n'.format(key,val))
+            file.write(f'{key}\n{val}\n')
 
 def open_file(file_name, mode):
     """Open a file."""
@@ -119,15 +119,18 @@ def main():
     trivia_file.close()   
     print("That was the last question!\n")
     print(f"Your ({player_name}) final score is {score}\n")
-    a = int(score_dict[player_name])
-    b = int(score)
-    if a > b:
-        print('We save your previous record!\n\n')
-    elif a == b:
-        print('You repeat your record!\n\n')
-    else:
+    try:
+        a = int(score_dict[player_name])
+        b = int(score)
+        if a > b:
+            print('We save your previous record!\n\n')
+        elif a == b:
+            print('You repeat your record!\n\n')
+    except:
         score_dict[player_name] = score
         save_records_txt()
+
+    
     show_records()
       
 main()
