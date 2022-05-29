@@ -2,8 +2,10 @@
 # Trivia game that reads a plain text file
 import sys, pickle, shelve
 
+
+
 def show_records():
-    global score_dict 
+    global score_dict
     score_dict = dict()
     try: 
         with open("trivia_score.txt") as file:
@@ -12,6 +14,7 @@ def show_records():
     except:
         print('Score list is empety!')
     else:
+        global to_print
         to_print = ''
         names = list(score_dict.keys())
         vals = list(score_dict.values())
@@ -21,34 +24,15 @@ def show_records():
                 if score_dict[names[i]] == val: 
                     to_print += f'{names.pop(i)}\t {val}\n' 
                     break #прервать цикл
-        #print('\nHigh scores\n')
-        #print(f'NAMES\tSCORES')
-        #print(to_print)
-        #print('---------')
     file.close
     print(to_print)
     return score_dict
 
 def save_records_txt():
-    with open('write_score.txt','w') as file:
+    with open('trivia_score.txt','w') as file:
         for key,val in score_dict.items():
             file.write('{}\n{}\n'.format(key,val))
-    '''
-    with open("write_score.txt", 'w') as file:
-        write_score_txt_keys = list(score_dict.keys())
-        write_score_txt_values = str(list(score_dict.values()))
-        print(write_score_txt_keys)
-        print(write_score_txt_values)
-        range_list = list()
-        for i in range(len(write_score_txt_keys)):
-            range_list += write_score_txt_keys[i]
-            range_list += write_score_txt_values[i]
-            #file.writelines(write_score_txt_keys[i])
-            #file.writelines(write_score_txt_values[i])
-        print(range_list)
-        #while file.writelines:= 
-        #file.writelines(["cat\n", "dog\n"])
-    '''    
+
 def open_file(file_name, mode):
     """Open a file."""
     try:
@@ -105,12 +89,12 @@ def welcome(title):
 
 
 def main():
+    show_records()
     player_name = input('Enter your name: ')
     trivia_file = open_file('bookMaterial/chapter07/trivia.txt', "r")
     title = next_line(trivia_file)
     welcome(title)
     score = 0
-    
     # get first block
     category, question, answers, correct, explanation, cost = next_block(trivia_file)
     while category:
@@ -119,10 +103,8 @@ def main():
         print(question)
         for i in range(4):
             print("\t", i + 1, "-", answers[i])
-
         # get answer
         answer = input("What's your answer?: ")
-
         # check answer
         if answer == correct:
             print("\nRight!", end=" ")
@@ -135,14 +117,14 @@ def main():
         # get next block
         category, question, answers, correct, explanation, cost = next_block(trivia_file)     
     trivia_file.close()   
-    print("That was the last question!")
-    print(f"Your ({player_name}) final score is {score}")
-    pickle_scores(player_name, score)
+    print("That was the last question!\n")
+    print(f"Your ({player_name}) final score is {score}\n")
+    score_dict[player_name] = score
+    save_records_txt()
+    show_records()
       
-show_records()
-print('----------------')
-save_records_txt()
-print('----------------')
-#main() 
+main()
+
+
 
 input("\n\nPress the enter key to exit.")
