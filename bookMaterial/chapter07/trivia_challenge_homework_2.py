@@ -119,8 +119,11 @@ def main():
     trivia_file.close()   
     print("That was the last question!\n")
     print(f"Your ({player_name}) final score is {score}\n")
-    score_dict[player_name] = score
-    save_records_txt()
+    if score_dict[player_name] <= score:
+        print('we save your previous record!')
+    else:
+        score_dict[player_name] = score
+        save_records_txt()
     show_records()
       
 main()
