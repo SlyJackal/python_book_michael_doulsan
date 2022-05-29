@@ -1,6 +1,6 @@
 # Trivia Challenge
 # Trivia game that reads a plain text file
-import sys, pickle, shelve
+import sys
 
 
 
@@ -119,8 +119,12 @@ def main():
     trivia_file.close()   
     print("That was the last question!\n")
     print(f"Your ({player_name}) final score is {score}\n")
-    if score_dict[player_name] <= score:
-        print('we save your previous record!')
+    a = int(score_dict[player_name])
+    b = int(score)
+    if a > b:
+        print('We save your previous record!\n\n')
+    elif a == b:
+        print('You repeat your record!\n\n')
     else:
         score_dict[player_name] = score
         save_records_txt()
