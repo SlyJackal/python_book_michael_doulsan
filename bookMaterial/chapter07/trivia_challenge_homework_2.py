@@ -3,6 +3,7 @@
 import sys
 
 score_dict = dict()
+to_print = str()
 
 def show_records():
     try: 
@@ -19,7 +20,7 @@ def show_records():
 
 def print_records():
     global to_print
-    to_print = ''
+    to_print = str()
     names = list(score_dict.keys())
     vals = list(score_dict.values())
     vals.sort(reverse=True)
