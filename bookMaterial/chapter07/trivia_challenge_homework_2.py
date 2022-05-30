@@ -2,11 +2,9 @@
 # Trivia game that reads a plain text file
 import sys
 
-
+score_dict = dict()
 
 def show_records():
-    global score_dict
-    score_dict = dict()
     try: 
         with open("trivia_score.txt") as file:
             while key := file.readline().strip():
@@ -14,21 +12,24 @@ def show_records():
     except:
         print('Score list is empty!')
     else:
-        global to_print
-        to_print = ''
-        names = list(score_dict.keys())
-        vals = list(score_dict.values())
-        vals.sort(reverse=True)
-        for val in vals:
-            for i in range(len(names)): 
-                if score_dict[names[i]] == val: 
-                    to_print += f'{names.pop(i)}\t {val}\n' 
-                    break #прервать цикл
+        print_records()
     file.close
     print(to_print)
     return score_dict
 
-def save_records_txt():
+def print_records():
+    global to_print
+    to_print = ''
+    names = list(score_dict.keys())
+    vals = list(score_dict.values())
+    vals.sort(reverse=True)
+    for val in vals:
+        for i in range(len(names)): 
+            if score_dict[names[i]] == val: 
+                to_print += f'{names.pop(i)}\t {val}\n' 
+                break #прервать цикл
+
+def save_records_txt(score_dict):
     with open('trivia_score.txt','w') as file:
         for key,val in score_dict.items():
             file.write(f'{key}\n{val}\n')
@@ -126,9 +127,14 @@ def main():
             print('We save your previous record!\n\n')
         elif a == b:
             print('You repeat your record!\n\n')
+        elif a < b:
+            score_dict[player_name] = score
+            save_records_txt(score_dict)
+            print_records()
     except:
         score_dict[player_name] = score
-        save_records_txt()
+        save_records_txt(score_dict)
+        print_records()
 
     
     show_records()
