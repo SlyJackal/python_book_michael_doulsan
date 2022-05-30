@@ -134,9 +134,7 @@ def main():
     except:
         score_dict[player_name] = score
         save_records_txt(score_dict)
-        print_records()
-
-    
+        print_records() 
     show_records()
       
 main()
