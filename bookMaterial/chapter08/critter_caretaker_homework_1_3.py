@@ -8,6 +8,12 @@ class Critter(object):
         self.hunger = hunger
         self.boredom = boredom
 
+    def __str__(self):
+        objects = f"Your {self.name} has:\nhunger - {self.hunger}\nboredom - {self.boredom}"
+        return objects  
+
+
+
     def __pass_time(self):
         self.hunger += 1
         self.boredom += 1
@@ -81,9 +87,19 @@ def main():
         elif choice == "3":
             crit.play()
 
+        # secret choice
+        elif choice == "4":
+            print(crit)
+
         # some unknown choice
         else:
             print("\nSorry, but", choice, "isn't a valid choice.")
 
 main()
 ("\n\nPress the enter key to exit.") 
+
+
+
+
+
+
