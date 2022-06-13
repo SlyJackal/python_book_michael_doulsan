@@ -1,6 +1,7 @@
 # Critter Caretaker
 # A virtual pet to care for
 import random
+
 class Critter(object):
     """A virtual pet"""
     def __init__(self, name, hunger = 0, boredom = 0):
@@ -51,12 +52,16 @@ class Critter(object):
 
 
 def main():
-    crit_name = input("What do you want to name your critter?: ")
-    crit_1 = Critter(crit_name)
-    crit_name = input("What do you want to name your critter?: ")
-    crit_2 = Critter(crit_name)
-    crit_name = input("What do you want to name your critter?: ")
-    crit_3 = Critter(crit_name)
+
+    count_critters = int(input('How many critters do you want? '))
+    critters_list = list()
+    for i in range(count_critters):     
+        crit_name = input("What do you want to name your critter?: ")
+        critters_list.append(Critter(crit_name))
+    
+    menu_dict = dict()
+    menu_dict = {'1': 'talk()', '2': 'eat()', '3': 'play()'}
+
 
     choice = None  
     while choice != "0":
@@ -77,30 +82,12 @@ def main():
         if choice == "0":
             print("Good-bye.")
 
-        # listen to your critter
-        elif choice == "1":
-            crit_1.talk()
-            crit_2.talk()
-            crit_3.talk()
-        
-        # feed your critter
-        elif choice == "2":
-            crit_1.eat()
-            crit_2.eat()
-            crit_3.eat()
-         
-        # play with your critter
-        elif choice == "3":
-            crit_1.play()
-            crit_2.play()
-            crit_3.play()
-
-        # secret choice
-        elif choice == "4":
-            print(crit_1)
-            print(crit_2)
-            print(crit_3)
-
+       
+        elif choice in menu_dict:
+           
+            for critter in critters_list:
+                print(getattr(critter, menu_dict[choice]))
+           
         # some unknown choice
         else:
             print("\nSorry, but", choice, "isn't a valid choice.")
