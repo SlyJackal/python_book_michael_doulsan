@@ -12,8 +12,6 @@ class Critter(object):
         objects = f"Your {self.name} has:\nhunger - {self.hunger}\nboredom - {self.boredom}"
         return objects  
 
-
-
     def __pass_time(self):
         self.hunger += 1
         self.boredom += 1
@@ -50,7 +48,6 @@ class Critter(object):
         if self.boredom < 0:
             self.boredom = 0
         self.__pass_time()
-
 
 def main():
     crit_name = input("What do you want to name your critter?: ")
