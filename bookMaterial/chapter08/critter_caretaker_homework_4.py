@@ -50,7 +50,6 @@ class Critter(object):
             self.boredom = 0
         self.__pass_time()
 
-
 def main():
 
     count_critters = int(input('How many critters do you want? '))
@@ -59,9 +58,7 @@ def main():
         crit_name = input("What do you want to name your critter?: ")
         critters_list.append(Critter(crit_name))
     
-    menu_dict = dict()
-    menu_dict = {'1': 'talk()', '2': 'eat()', '3': 'play()'}
-
+    menu_dict = {'1': 'talk', '2': 'eat', '3': 'play'}
 
     choice = None  
     while choice != "0":
@@ -82,12 +79,14 @@ def main():
         if choice == "0":
             print("Good-bye.")
 
-       
         elif choice in menu_dict:
-           
             for critter in critters_list:
-                print(getattr(critter, menu_dict[choice]))
-           
+                getattr(critter, menu_dict[choice])()
+
+        elif choice == "4":
+            for critter in critters_list:
+                print(f'{critter}\n')
+
         # some unknown choice
         else:
             print("\nSorry, but", choice, "isn't a valid choice.")
