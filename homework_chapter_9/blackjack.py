@@ -23,17 +23,7 @@ class BJ_Deck(cards.Deck):
         for suit in BJ_Card.SUITS: 
             for rank in BJ_Card.RANKS: 
                 self.cards.append(BJ_Card(rank, suit))
-        '''
-        if self.cards == BJ_Card.SUITS:
-            print(self.cards)
-            print(BJ_Card.SUITS)
-            random.shuffle(self.cards)
-            print(self.cards)
-        else:
-            print('Something wrong')
-            print(self.cards)
-            print(BJ_Card.SUITS)
-        '''
+
                     
     
 

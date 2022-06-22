@@ -14,7 +14,7 @@ class Player(object):
 def ask_yes_no(question):
     """Ask a yes or no question."""
     response = None
-    while response not in ("y", "n") or ("yes", "no"):
+    while response not in ("y", "n", "yes", "no"):
         print('Use only "y" or "yes", "n" or "no"!')
         response = input(question).lower()
     return response

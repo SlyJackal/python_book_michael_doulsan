@@ -7,7 +7,7 @@ class Card(object):
              "8", "9", "10", "J", "Q", "K"]
     SUITS = ["c", "d", "h", "s"]
 
-    def __init__(self, rank, suit, face_up = True):
+    def __init__(self, rank, suit, face_up=True):
         self.rank = rank
         self.suit = suit
         self.is_face_up = face_up
@@ -22,7 +22,7 @@ class Card(object):
     def flip(self):
         self.is_face_up = not self.is_face_up
       
-class Hand(object):
+class Hand():
     """ A hand of playing cards. """
     def __init__(self):
         self.cards = []
@@ -64,6 +64,8 @@ class Deck(Hand):
                     top_card = self.cards[0]
                     self.give(top_card, hand)
                 else:
+                    self.deck.populate()
+                    self.deck.shuffle()
                     print("Can't continue deal. Out of cards!")
 
 
