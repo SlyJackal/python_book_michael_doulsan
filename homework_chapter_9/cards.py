@@ -18,6 +18,7 @@ class Card(object):
         else:
             rep = "XX"
         return rep
+        
 
     def flip(self):
         self.is_face_up = not self.is_face_up
@@ -64,9 +65,8 @@ class Deck(Hand):
                     top_card = self.cards[0]
                     self.give(top_card, hand)
                 else:
-                    #.BJ_Hand(cards.Hand)
-                    #.deck.populate()
-                    #.deck.shuffle()
+                    Deck.populate()
+                    Deck.shuffle()
                     print("Can't continue deal. Out of cards!")
 
 
