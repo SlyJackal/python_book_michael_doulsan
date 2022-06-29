@@ -64,9 +64,12 @@ class Deck(Hand):
                 if self.cards:
                     top_card = self.cards[0]
                     self.give(top_card, hand)
+                elif len(self.cards) < 10:
+                    Deck.populate(self)
+                    Deck.shuffle(self)
                 else:
-                    Deck.populate(Hand)
-                    Deck.shuffle(Hand)
+                    Deck.populate(self)
+                    Deck.shuffle(self)
                     print("Can't continue deal. Out of cards!")
 
 
