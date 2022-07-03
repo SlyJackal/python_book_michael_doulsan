@@ -178,7 +178,13 @@ def main():
     names = []
     number = games.ask_number("How many players? (1 - 7): ", low = 1, high = 8)
     for i in range(number):
-        name = input("Enter player name: ")
+        name = ''
+        while len(name) > 5 or len(name) == 0:
+            name = input("Enter player name: ")
+            if len(name) > 5:
+                print('Are U kidding me? U can use 5 or less symbols')
+            elif len(name) == 0:
+                print("Are U kidding me? U can't use 0 symbols")
         names.append(name)
     print()
         
