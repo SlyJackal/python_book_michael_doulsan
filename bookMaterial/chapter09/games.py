@@ -14,7 +14,8 @@ class Player(object):
 def ask_yes_no(question):
     """Ask a yes or no question."""
     response = None
-    while response not in ("y", "n"):
+    while response not in ("y", "n", "yes", "no"):
+        print('Use only "y" or "yes", "n" or "no"!')
         response = input(question).lower()
     return response
 
@@ -22,7 +23,13 @@ def ask_number(question, low, high):
     """Ask for a number within a range."""
     response = None
     while response not in range(low, high):
-        response = int(input(question))
+        try:
+            response = int(input(question))
+            if response not in range(low, high):
+                raise ValueError
+        except ValueError:
+            print(f'You can use only numbers from {low} to {high}')
+            response = None
     return response
 
   
