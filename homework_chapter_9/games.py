@@ -30,6 +30,9 @@ def ask_number(question, low, high):
         except ValueError:
             print(f'You can use only numbers from {low} to {high}')
             response = None
+        except KeyboardInterrupt:
+            print('\nBye!')
+            exit()
     return response
 
   
