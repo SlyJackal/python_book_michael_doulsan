@@ -25,13 +25,9 @@ def ask_number(question, low, high):
     while response not in range(low, high):
         try:
             response = int(input(question))
-            if response < low:
-                print(f'Are you stupid? We need {low} player minimum!')
-                response = None
-            elif response > high:
-                print(f'Are you stupid? We need not more {high} players!')
-                response = None
-        except:
+            if response not in range(low, high):
+                raise ValueError
+        except ValueError:
             print(f'You can use only numbers from {low} to {high}')
             response = None
     return response
