@@ -1,7 +1,9 @@
 # Blackjack
 # From 1 to 7 players compete against a dealer
 
-import cards, games, random     
+import imp
+import cards, games 
+from games import QuitGameException 
 
 class BJ_Card(cards.Card):
     """ A Blackjack Card. """
@@ -173,27 +175,33 @@ class BJ_Game(object):
         
 
 def main():
-    print("\t\tWelcome to Blackjack!\n")
-    
-    names = []
-    number = games.ask_number("How many players? (1 - 7): ", low = 1, high = 8)
-    for i in range(number):
-        name = ''
-        while len(name) > 5 or len(name) == 0:
-            name = input("Enter player name: ")
-            if len(name) > 5:
-                print('Are U kidding me? U can use 5 or less symbols')
-            elif len(name) == 0:
-                print("Are U kidding me? U can't use 0 symbols")
-        names.append(name)
-    print()
+    try:
+        print("\t\tWelcome to Blackjack!\n")
         
-    game = BJ_Game(names)
+        names = []
+        number = games.ask_number("How many players? (1 - 7): ", low = 1, high = 8)
+        for i in range(number):
+            name = ''
+            while len(name) > 5 or len(name) == 0:
+                name = input("Enter player name: ")
+                if len(name) > 5:
+                    print('Are U kidding me? U can use 5 or less symbols')
+                elif len(name) == 0:
+                    print("Are U kidding me? U can't use 0 symbols")
+            names.append(name)
+        print()
+            
+        game = BJ_Game(names)
 
-    again = None
-    while again != "n":
-        game.play()
-        again = games.ask_yes_no("\nDo you want to play again?: ")
+        again = None
+        while again != "n":
+            game.play()
+            again = games.ask_yes_no("\nDo you want to play again?: ")
+    except QuitGameException:
+        print('Bye!')
+        exit()
+        
+        
 
 
 main()

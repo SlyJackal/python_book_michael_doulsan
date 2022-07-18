@@ -1,3 +1,5 @@
 
 *.dat
 pickle_scores.dat
+*.pyc
+__pycache__

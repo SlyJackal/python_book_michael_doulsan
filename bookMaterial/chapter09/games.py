@@ -1,6 +1,10 @@
 # Games
 # Demonstrates module creation
 
+class QuitGameException(Exception):
+    '''My QuitGameException class is exception'''
+    pass
+
 class Player(object):
     """ A player for a game. """
     def __init__(self, name, score = 0):
@@ -17,6 +21,8 @@ def ask_yes_no(question):
     while response not in ("y", "n", "yes", "no"):
         print('Use only "y" or "yes", "n" or "no"!')
         response = input(question).lower()
+        if response == 'q':
+            raise QuitGameException
     return response
 
 def ask_number(question, low, high):
@@ -24,9 +30,14 @@ def ask_number(question, low, high):
     response = None
     while response not in range(low, high):
         try:
-            response = int(input(question))
+            response = input(question)
+            if response == 'q':
+                raise QuitGameException
+            response = int(response)
             if response not in range(low, high):
                 raise ValueError
+            
+                
         except ValueError:
             print(f'You can use only numbers from {low} to {high}')
             response = None
