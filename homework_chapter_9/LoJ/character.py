@@ -6,7 +6,8 @@ class CharacterPlayer():
         self.level = 1
         self.strength = randrange(1,4)
         self.armor = randrange(1,4)
-        self.health = randrange(10,15)
+        self.max_health = randrange(10,15)
+        self.health = self.max_health
 
     def level_up(self):
         strength_upgrade = randrange(1,5)
@@ -16,7 +17,7 @@ class CharacterPlayer():
         print(f'self.level = {self.level}')
         self.strength += strength_upgrade
         self.armor += armor_upgrade
-        self.health += health_upgrade
+        self.max_health += health_upgrade
 
     def damage_out(self):
         random_rate = triangular(0.5, 2)
@@ -29,6 +30,7 @@ class CharacterPlayer():
         armor_rate = self.armor * triangular(0.6, 1)
         armor_rate = int(armor_rate)
         damage_in = enemie_damage * armor_rate
+        return damage_in
 
 
 
