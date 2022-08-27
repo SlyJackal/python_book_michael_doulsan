@@ -1,8 +1,8 @@
 from random import randrange, triangular
 
 class Enemie():
-    def __init__(self, multiplier = 1):
-        self.level = multiplier
+    def __init__(self, char_level = 1):
+        self.level = char_level
         self.strength = randrange(1,4) * level
         self.armor = randrange(1,4) * level
         self.health = randrange(10,15) * level
@@ -20,4 +20,6 @@ class Enemie():
         damage_in = enemie_damage * armor_rate
         return damage_in
  
-
+if name == "main":
+    print("This is a module for character.")
+    input("\n\nPress the enter key to exit.")
