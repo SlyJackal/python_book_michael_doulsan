@@ -10,14 +10,12 @@ class CharacterPlayer():
         self.health = self.max_health
 
     def level_up(self):
-        strength_upgrade = randrange(1,5)
-        armor_upgrade = randrange(1,5)
-        health_upgrade = randrange(5,10)
         self.level += 1
         print(f'self.level = {self.level}')
-        self.strength += strength_upgrade
-        self.armor += armor_upgrade
-        self.max_health += health_upgrade
+        self.strength += randrange(1,5)
+        self.armor += randrange(1,5)
+        self.max_health += randrange(5,10)
+        print(f'Your characteristics was upgraded:\nStrenght - {self.strength}\nArmor - {self.armor}\nHealh - {self.health}')
 
     def damage_out(self):
         random_rate = triangular(0.5, 2)
