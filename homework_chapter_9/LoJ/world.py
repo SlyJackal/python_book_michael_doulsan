@@ -4,9 +4,7 @@ class World():
     def __init__(self):
         map_size = randrange(10, 20)
         print(f'Map Size - {map_size}')
-        map = list()
-        for i in range(map_size):
-            map.append(i)
+        map = list(range(map_size))
         print(map)
 
 if name == "main":
