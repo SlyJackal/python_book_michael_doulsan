@@ -4,9 +4,9 @@ class Enemie():
     def __init__(self, multiplier = 1):
         self.multiplier = multiplier
         self.level = multiplier
-        self.strength = randrange(1,4) * multiplier
-        self.armor = randrange(1,4) * multiplier
-        self.health = randrange(10,15) * multiplier
+        self.strength = randrange(1,4) * level
+        self.armor = randrange(1,4) * level
+        self.health = randrange(10,15) * level
 
     def damage_out(self):
         random_rate = triangular(0.5, 2)
