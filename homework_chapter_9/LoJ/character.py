@@ -30,6 +30,6 @@ class CharacterPlayer():
         damage_in = enemie_damage * armor_rate
         return damage_in
 
-if name == "main":
+if __name__ == "__main__":
     print("This is a module for character.")
     input("\n\nPress the enter key to exit.")

@@ -20,6 +20,6 @@ class Enemie():
         damage_in = enemie_damage * armor_rate
         return damage_in
  
-if name == "main":
-    print("This is a module for character.")
+if __name__ == "__main__":
+    print("This is a module for enemies.")
     input("\n\nPress the enter key to exit.")

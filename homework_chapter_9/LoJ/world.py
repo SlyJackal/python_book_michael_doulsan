@@ -7,6 +7,6 @@ class World():
         map = list(range(map_size))
         print(map)
 
-if name == "main":
+if __name__ == "__main__":
     print("This is a module for world creation.")
     input("\n\nPress the enter key to exit.")
